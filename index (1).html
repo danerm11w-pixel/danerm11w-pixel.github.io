@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FranceHome Location — Locations en France</title>
+<meta name="description" content="Chambres, studios et appartements à louer en France.">
+<style>
+:root{--navy:#10243e;--blue:#1769aa;--gold:#d6a84f;--light:#f5f7fa;--text:#182433;--muted:#667085;--white:#fff;--shadow:0 12px 35px rgba(16,36,62,.10)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--text);background:#f7f9fc}a{text-decoration:none;color:inherit}
+header{background:linear-gradient(135deg,#0e223b,#174c78);color:white;padding:18px 6%}
+.nav{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-size:24px;font-weight:800;letter-spacing:.3px}.logo span{color:#e5bc62}
+nav{display:flex;gap:24px;font-size:14px}nav a{opacity:.9}
+.hero{background:linear-gradient(135deg,#10243e 0%,#1769aa 100%);color:white;padding:68px 6% 90px}
+.hero-inner{max-width:1180px;margin:auto}.badge{display:inline-block;background:rgba(255,255,255,.13);padding:8px 13px;border-radius:30px;font-size:13px;margin-bottom:16px}
+h1{font-size:clamp(36px,6vw,62px);line-height:1.03;margin:0 0 16px;max-width:760px}.hero p{font-size:18px;line-height:1.6;max-width:680px;color:#e4edf6}
+.search{margin-top:28px;background:white;border-radius:16px;padding:14px;display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:10px;box-shadow:var(--shadow);max-width:1000px}
+select,input,.btn{height:50px;border:1px solid #d9e0e8;border-radius:10px;padding:0 14px;font-size:14px;background:white}.btn{background:var(--gold);border:0;color:#172333;font-weight:800;cursor:pointer;padding:0 22px}
+main{max-width:1180px;margin:auto;padding:55px 6%}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:22px}.section-head h2{margin:0;font-size:30px}.section-head p{margin:6px 0 0;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}.card{background:white;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);border:1px solid #edf0f4}.photo{height:280px;background-size:cover;background-position:center;position:relative}.tag{position:absolute;top:13px;left:13px;background:white;color:var(--navy);padding:7px 10px;border-radius:20px;font-size:12px;font-weight:700}.price{position:absolute;right:13px;bottom:13px;background:rgba(16,36,62,.92);color:white;padding:8px 11px;border-radius:9px;font-weight:800}
+.card-body{padding:18px}.card h3{margin:0 0 8px;font-size:20px}.location{color:var(--muted);font-size:14px;margin-bottom:13px}.features{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:17px}.feature{background:#f1f5f9;padding:6px 9px;border-radius:7px;font-size:12px;color:#455468}.card .contact{display:block;text-align:center;background:var(--blue);color:white;padding:12px;border-radius:9px;font-weight:700}
+.details{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:15px 0}.detail{font-size:13px;padding:10px;background:#f8fafc;border-radius:8px}.detail b{display:block;color:var(--navy);margin-bottom:2px}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.gallery img{width:100%;height:95px;object-fit:cover;border-radius:8px;cursor:pointer}.note{font-size:12px;color:#667085;background:#fff8e7;border-left:3px solid var(--gold);padding:10px 12px;border-radius:7px;margin:14px 0;line-height:1.5}
+.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:20px 0 60px}.cat{padding:25px;background:white;border-radius:15px;box-shadow:var(--shadow);text-align:center}.cat strong{display:block;font-size:18px;margin:8px}.cat span{font-size:13px;color:var(--muted)}
+.info{background:#10243e;color:white;border-radius:20px;padding:35px;display:grid;grid-template-columns:1.4fr 1fr;gap:30px;margin-top:55px}.info h2{margin-top:0}.info p{color:#d9e5f0;line-height:1.7}.steps{display:grid;gap:12px}.step{background:rgba(255,255,255,.08);padding:14px;border-radius:10px}.step b{color:#e5bc62}
+footer{background:#0b192b;color:#b9c5d2;padding:35px 6%;margin-top:60px}.foot{max-width:1180px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px}
+.empty{display:none;text-align:center;color:var(--muted);padding:30px}
+@media(max-width:850px){nav{display:none}.search{grid-template-columns:1fr 1fr}.search .btn{grid-column:1/-1}.grid{grid-template-columns:1fr}.categories{grid-template-columns:1fr 1fr}.info{grid-template-columns:1fr}}
+@media(max-width:560px){header{padding:16px 5%}.hero{padding:45px 5% 70px}main{padding:42px 5%}.search{grid-template-columns:1fr}.search .btn{grid-column:auto}.grid,.categories{grid-template-columns:1fr}.photo{height:230px}.info{padding:25px}.gallery{grid-template-columns:repeat(2,1fr)}.gallery img{height:110px}}
+</style>
+
+<style id="gallery-v12-fix">
+/* Galerie immobilière : toutes les photos visibles directement */
+.property-gallery .gallery-thumbs,
+.gallery-thumbs {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  margin-top: 12px !important;
+  overflow: visible !important;
+}
+.property-gallery .gallery-thumbs img,
+.gallery-thumbs img {
+  width: 100% !important;
+  height: 92px !important;
+  object-fit: cover !important;
+  border-radius: 10px !important;
+  cursor: pointer !important;
+  display: block !important;
+}
+@media (max-width: 700px) {
+  .property-gallery .gallery-thumbs,
+  .gallery-thumbs {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+  }
+  .property-gallery .gallery-thumbs img,
+  .gallery-thumbs img {
+    height: 72px !important;
+  }
+}
+</style>
+
+
+<style id="gallery-v12-extra">
+.gallery-grid, .photo-thumbnails, .thumbnails {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0,1fr)) !important;
+  gap: 10px !important;
+}
+.gallery-grid img, .photo-thumbnails img, .thumbnails img {
+  width:100% !important; height:92px !important; object-fit:cover !important;
+}
+@media(max-width:700px){
+ .gallery-grid, .photo-thumbnails, .thumbnails {grid-template-columns:repeat(3,minmax(0,1fr)) !important; gap:7px !important;}
+ .gallery-grid img, .photo-thumbnails img, .thumbnails img {height:72px !important;}
+}
+</style>
+
+</head>
+<body>
+<header>
+<div class="nav">
+<div class="logo">France<span>Home</span> Location</div>
+<nav><a href="#logements">Logements</a><a href="#types">Types</a><a href="#apropos">À propos</a><a href="#contact">Contact</a></nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<div class="badge">🇫🇷 Locations en France</div>
+<h1>Trouvez votre prochaine chambre ou logement en France.</h1>
+<p>Consultez nos annonces de logements disponibles et contactez-nous directement pour obtenir les informations et organiser votre location.</p>
+<div class="search">
+<select id="type"><option value="">Tous les logements</option><option>Chambre</option><option>Studio</option><option>Appartement</option></select>
+<select id="city"><option value="">Toutes les villes</option><option>Argenteuil</option><option>Paris</option><option>Lyon</option><option>Marseille</option><option>Toulouse</option><option>Bordeaux</option><option>Lille</option><option>Nantes</option><option>Strasbourg</option><option>Montpellier</option></select>
+<input id="max" type="number" placeholder="Budget max (€ / mois)">
+<button class="btn" onclick="filterCards()">Rechercher</button>
+</div>
+</div>
+</section>
+
+<main>
+<section id="types">
+<div class="section-head"><div><h2>Choisissez votre logement</h2><p>Des solutions pour différents besoins et budgets.</p></div></div>
+<div class="categories">
+<div class="cat">🛏️<strong>Chambres</strong><span>Meublées ou non meublées</span></div>
+<div class="cat">🏠<strong>Studios</strong><span>Compacts et pratiques</span></div>
+<div class="cat">🏢<strong>Appartements</strong><span>Pour une installation plus complète</span></div>
+</div>
+</section>
+
+<section id="logements">
+<div class="section-head"><div><h2>Logements disponibles</h2><p>Consultez les détails de chaque annonce et contactez-nous pour en savoir plus.</p></div></div>
+<div class="grid" id="cards">
+
+<article class="card" data-type="Appartement" data-city="Argenteuil" data-price="980">
+<div class="photo" style="background-image:url('argenteuil-sejour-1.jpg')">
+<span class="tag">Appartement • 4 pièces</span><span class="price">980 € / mois CC</span>
+</div>
+<div class="card-body">
+<h3>Appartement 4 pièces — Argenteuil Centre</h3>
+<div class="location">📍 Argenteuil — Centre-ville, à proximité du centre commercial Géant</div>
+<div class="features">
+<span class="feature">101 m²</span><span class="feature">3 chambres</span><span class="feature">3e étage / 5</span><span class="feature">Parking</span><span class="feature">DPE D</span><span class="feature">Sud-Est</span>
+</div>
+<p>Très bel appartement de 101 m² en parfait état, avec vaste séjour, salle à manger pouvant servir de chambre, cuisine équipée séparée, salle de bain, salle d’eau avec WC et deux chambres.</p>
+<div class="details">
+<div class="detail"><b>💶 Loyer</b>980 € / mois, charges comprises</div>
+<div class="detail"><b>📅 Réservation</b>200 € à verser 2 semaines à l’avance, somme déduite du loyer</div>
+<div class="detail"><b>🛏️ Chambres</b>3 chambres</div>
+<div class="detail"><b>🍳 Cuisine</b>Équipée et séparée</div>
+<div class="detail"><b>🚿 Sanitaires</b>1 salle de bain + 1 salle d’eau + 1 WC</div>
+<div class="detail"><b>🚗 Parking</b>1 place en sous-sol sécurisé</div>
+<div class="detail"><b>🔥 Chauffage</b>Radiateur gaz individuel</div>
+<div class="detail"><b>🌐 Internet</b>Fibre déployée</div>
+<div class="detail"><b>🚆 Transport</b>Gare SNCF à environ 5 min à pied</div>
+</div>
+
+<p style="font-size:13px;color:#667085"><strong>Réf. annonce :</strong> 173_128 · <strong>Honoraires locataire :</strong> 808 € dont 308 € pour l'état des lieux · <strong>Publié le :</strong> 10 septembre 2026.</p>
+<div class="gallery">
+<img src="argenteuil-sejour-1.jpg" alt="Séjour de l'appartement à Argenteuil">
+<img src="argenteuil-sejour-2.jpg" alt="Séjour de l'appartement à Argenteuil">
+<img src="argenteuil-sejour-3.jpg" alt="Séjour de l'appartement à Argenteuil">
+<img src="argenteuil-sejour-4.jpg" alt="Séjour de l'appartement à Argenteuil">
+<img src="argenteuil-sejour-5.jpg" alt="Séjour de l'appartement à Argenteuil">
+<img src="argenteuil-sejour-6.jpg" alt="Pièce de vie de l'appartement à Argenteuil">
+<img src="argenteuil-cuisine.jpg" alt="Cuisine équipée de l'appartement">
+<img src="argenteuil-chambre.jpg" alt="Chambre de l'appartement">
+<img src="argenteuil-sejour-7.jpg" alt="Pièce de vie de l'appartement">
+<img src="argenteuil-sejour-8.jpg" alt="Pièce de vie de l'appartement">
+</div>
+<a class="contact" style="margin-top:16px" href="https://wa.me/33757756266?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27appartement%20de%20101%20m%C2%B2%20%C3%A0%20Argenteuil%20%28r%C3%A9f.%20173_128%29." target="_blank">💬 Réservez maintenant</a>
+</div>
+</article>
+
+</div>
+<div class="empty" id="empty">Aucun logement ne correspond à votre recherche.</div>
+</section>
+
+<section id="apropos" class="info">
+<div><h2>Un accompagnement simple pour votre location</h2>
+<p>Notre objectif est de présenter clairement les logements disponibles et de faciliter la prise de contact pour les personnes à la recherche d'un logement.</p>
+<p>Les informations, prix, disponibilités et conditions sont indiqués dans chaque annonce. Vérifiez toujours les modalités et les documents avant tout paiement ou engagement.</p>
+</div>
+<div class="steps"><div class="step"><b>01.</b> Choisissez votre type de logement</div><div class="step"><b>02.</b> Consultez les détails de l'annonce</div><div class="step"><b>03.</b> Contactez-nous directement</div><div class="step"><b>04.</b> Vérifiez les conditions avant paiement</div></div>
+</section>
+</main>
+
+<footer id="contact"><div class="foot"><div><strong>FranceHome Location</strong><br>Studios • Chambres • Appartements</div><div>WhatsApp : +33 7 57 75 62 66<br>Email : danerm11w@gmail.com</div><div>© 2026 FranceHome Location</div></div></footer>
+
+<script>
+function filterCards(){
+  const type=document.getElementById('type').value;
+  const city=document.getElementById('city').value;
+  const max=parseFloat(document.getElementById('max').value)||Infinity;
+  const cards=[...document.querySelectorAll('.card')];
+  let shown=0;
+  cards.forEach(c=>{
+    const ok=(!type||c.dataset.type===type)&&(!city||c.dataset.city===city)&&(parseFloat(c.dataset.price)||0)<=max;
+    c.style.display=ok?'block':'none'; if(ok) shown++;
+  });
+  document.getElementById('empty').style.display=shown?'none':'block';
+}
+document.querySelectorAll('.gallery img').forEach(img=>{
+  img.addEventListener('click',()=>window.open(img.src,'_blank'));
+});
+</script>
+</body>
+</html>
